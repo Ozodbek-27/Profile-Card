@@ -1,0 +1,227 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:root {
+	--bg: #f0f2f5;
+	--text: #111827;
+	--muted: #6b7280;
+	--card: #ffffff;
+	--card-border: transparent;
+	--accent: #2563eb;
+	--accent-hover: #1d4ed8;
+	--link: #2563eb;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+/* ===== Base (mobile-first) ===== */
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	margin: 0;
+	padding: max(clamp(12px, 4vw, 32px), env(safe-area-inset-top))
+		max(clamp(12px, 4vw, 32px), env(safe-area-inset-right))
+		max(clamp(12px, 4vw, 32px), env(safe-area-inset-bottom))
+		max(clamp(12px, 4vw, 32px), env(safe-area-inset-left));
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5;
+	transition:
+		background-color 0.3s,
+		color 0.3s;
+}
+
+.profile-card {
+	width: 100%;
+	max-width: 340px;
+	padding: clamp(20px, 6vw, 36px) clamp(16px, 5vw, 28px);
+	background-color: var(--card);
+	border: 1px solid var(--card-border);
+	border-radius: clamp(14px, 3vw, 20px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition:
+		background-color 0.3s,
+		border-color 0.3s;
+}
+
+.profile-img {
+	display: block;
+	width: clamp(96px, 30vw, 140px);
+	height: auto;
+	aspect-ratio: 1 / 1;
+	margin: 0 auto 16px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+h1 {
+	margin: 0 0 4px;
+	font-size: clamp(1.25rem, 5vw, 1.75rem);
+	line-height: 1.2;
+	overflow-wrap: anywhere;
+}
+
+.job {
+	margin: 0 0 15px;
+	color: var(--muted);
+	font-size: clamp(0.9rem, 3.5vw, 1rem);
+}
+
+.bio {
+	margin: 0;
+	font-size: clamp(0.875rem, 3.5vw, 1rem);
+	overflow-wrap: anywhere;
+}
+
+/* ===== Links ===== */
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+	margin: 20px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.links a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 0 16px;
+	color: var(--link);
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 8px;
+}
+
+.links a:hover,
+.links a:focus-visible {
+	text-decoration: underline;
+}
+
+/* ===== Button ===== */
+#theme-btn {
+	width: 100%;
+	min-height: 44px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 8px;
+	background-color: var(--accent);
+	color: #ffffff;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#theme-btn:hover {
+	background-color: var(--accent-hover);
+}
+
+#theme-btn:focus-visible,
+.links a:focus-visible {
+	outline: 3px solid #93c5fd;
+	outline-offset: 2px;
+}
+
+/* ===== Dark mode ===== */
+body.dark {
+	--bg: #121212;
+	--text: #ffffff;
+	--muted: #9ca3af;
+	--card: #242424;
+	--card-border: #333333;
+	--link: #60a5fa;
+}
+
+/* ===== Juda kichik telefonlar (<= 359px) ===== */
+@media (max-width: 359px) {
+	.links {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 4px;
+	}
+}
+
+/* ===== Planshet (>= 768px) ===== */
+@media (min-width: 768px) {
+	.profile-card {
+		max-width: 420px;
+	}
+
+	#theme-btn {
+		width: auto;
+		min-width: 180px;
+	}
+}
+
+/* ===== Katta ekran (>= 1200px) ===== */
+@media (min-width: 1200px) {
+	.profile-card {
+		max-width: 460px;
+		padding: 44px 36px;
+	}
+
+	.bio {
+		font-size: 1.05rem;
+	}
+}
+
+/* ===== Telefon yotqizilganda (landscape, past balandlik) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+	body {
+		align-items: flex-start;
+	}
+
+	.profile-card {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		column-gap: 24px;
+		align-items: center;
+		max-width: 640px;
+		text-align: left;
+	}
+
+	.profile-img {
+		grid-row: 1 / span 5;
+		width: clamp(90px, 22vh, 130px);
+		margin: 0;
+	}
+
+	.job {
+		margin-bottom: 8px;
+	}
+
+	.links {
+		justify-content: flex-start;
+		margin: 10px 0;
+	}
+
+	.links a {
+		padding: 0 12px 0 0;
+	}
+
+	#theme-btn {
+		width: auto;
+		justify-self: start;
+	}
+}
+
+/* ===== Animatsiyani kamaytirish ===== */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none !important;
+	}
+}
